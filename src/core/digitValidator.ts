@@ -14,7 +14,8 @@ const DIGITS_BY_BASE: Record<Base, string> = {
 export const createDigitValidator =
     (base: Base) =>
     (char: string): boolean => {
-        return !!(base + char);
+        if (typeof char !== 'string' || char.length !== 1) return false;
+        return DIGITS_BY_BASE[base].includes(char.toLowerCase());
     };
 
 export const digitCount = (base: Base): number => DIGITS_BY_BASE[base].length;
